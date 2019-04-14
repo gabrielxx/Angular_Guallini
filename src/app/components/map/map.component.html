@@ -1,0 +1,23 @@
+
+<agm-map 
+  [latitude]="lat" 
+  [longitude]="lng"
+  [zoom]="10"
+  [zoomControl]="true">
+    <agm-marker 
+      [latitude]="lat" 
+      [longitude]="lng"
+      [label]="label">
+      <agm-info-window>
+          <strong>InfoWindow content</strong>
+      </agm-info-window>
+    </agm-marker>
+    <agm-marker 
+    [latitude]="-34.6083667" 
+    [longitude]="-58.3722832"
+    [label]="label">
+    <agm-info-window>
+        <strong>InfoWindow content</strong>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>

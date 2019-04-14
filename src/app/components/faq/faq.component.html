@@ -1,0 +1,25 @@
+<div class="row mt-5">
+  <div class="col-md-10 offset-md-1">
+
+    <div class="accordion" id="accordionExample">
+      <div class="card  border-left-0 border-right-0 "  *ngFor="let faq of Faqs | async ; let i = index">
+        <div class="card-header bg-white border-0 p-0" [attr.id]="'heading' + i">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed font-weight-bolder text-justify" type="button" data-toggle="collapse" [attr.data-target]="'#collapse'+i"
+              aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+              <i class="fas fa-plus-circle mr-3"></i>
+              <i class="fas fa-minus-circle mr-3"></i>
+               {{faq.pregunta}}
+            </button>
+          </h2>
+        </div>
+        <div id="collapse{{i}}" class="collapse" aria-labelledby="'heading' + i" data-parent="#accordionExample">
+          <div class="card-body text-justify">
+              {{faq.respuesta}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

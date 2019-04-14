@@ -1,0 +1,67 @@
+<div class="col-md-12 mt-5">
+  <div class="row">
+    <div class="col-md-4 col-sm-12 pl-md-5">
+      <div class="card ">
+        <div class="card-header bg-dark text-light">
+          <h5 class="mb-0">
+            <i class="fa fa-search fa-20" aria-hidden="true"></i>
+            Buscador
+          </h5>
+        </div>
+        <div class="card-body bg-gray">
+          <form [formGroup]="formSearch">
+            <div class="form-group col-md-12">
+              <label class="control-label" for="desde">Desde</label>
+              <input type="date" class="form-control" name="desde"/>
+            </div>
+            <div class="form-group col-md-12">
+              <label class="control-label" for="hasta">Hasta</label>
+              <input type="date" class="form-control" name="hasta"/>
+            </div>
+            <div class="form-group col-md-12">
+              <label class="control-label" for="tipo_operacion">Tipo de Operación</label>
+              <select class="form-control" name="tipo_operacion" formControlName="tipo_operacion">
+                <option value="" selected>Seleccione</option>
+                <option value="Alquiler">Alquiler</option>
+                <option value="Venta">Venta</option>
+
+              </select>
+            </div>
+            <div class="form-group col-md-12">
+              <label class="control-label" for="barrio">Barrio</label>
+              <select class="form-control" name="barrio" formControlName="barrio">
+                <option value="" selected>Seleccione</option>
+                <option value="Palermo">Palermo</option>
+              </select>
+            </div>
+            <div class="form-group col-md-12">
+              <label class="control-label" for="  ">Tipo de Propiedad</label>
+              <select class="form-control" name="tipo_propiedad" formControlName="tipo_propiedad">
+                <option value="" selected>Seleccione</option>
+                <option value="Departamento">Departamento</option>
+              </select>
+            </div>
+            <div class="col-md-12 text-center">
+              <button type="button" (click)="onSearch()" class="btn btn-danger" style="width: 100%">
+                <i class="fa fa-search fa-20" aria-hidden="true"></i>
+                Buscar
+              </button>
+              <hr>
+              4725-0795 / 3221-4106
+              www.guallinipropiedades.com
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-8 col-sm-12 pr-md-5">
+        <div class="card" *ngIf="show; else elseBlock">
+            <app-propiedades></app-propiedades>
+        </div>
+        <ng-template #elseBlock>
+                <app-detail-propiedad></app-detail-propiedad>
+        </ng-template>
+    </div>
+  </div>
+</div>
