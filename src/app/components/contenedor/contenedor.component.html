@@ -11,15 +11,16 @@
         <div class="card-body bg-gray">
           <form [formGroup]="formSearch">
             <div class="form-group col-md-12">
-              <label class="control-label" for="desde">Desde</label>
-              <input type="date" class="form-control" name="desde"/>
+              <label class="control-label" for="orderBy">Ordenar Por</label>
+              <select class="form-control" name="orderBy" formControlName="orderBy">
+                <option value="" selected>Seleccione</option>
+                <option value="precio">Precio</option>
+                <option value="dormitorios">Nro. Habitacion</option>
+                <option value="antiguedad">Antiguedad</option>
+              </select>
             </div>
             <div class="form-group col-md-12">
-              <label class="control-label" for="hasta">Hasta</label>
-              <input type="date" class="form-control" name="hasta"/>
-            </div>
-            <div class="form-group col-md-12">
-              <label class="control-label" for="tipo_operacion">Tipo de Operación</label>
+              <label class="control-label" for="tipo_operacion">Transacción</label>
               <select class="form-control" name="tipo_operacion" formControlName="tipo_operacion">
                 <option value="" selected>Seleccione</option>
                 <option value="Alquiler">Alquiler</option>
@@ -32,13 +33,17 @@
               <select class="form-control" name="barrio" formControlName="barrio">
                 <option value="" selected>Seleccione</option>
                 <option value="Palermo">Palermo</option>
+                <option value="Victoria">Victoria</option>
+                <option value="Recoleta">Recoleta</option>          
+                <option value="San Fernando">San Fernando</option>          
               </select>
             </div>
             <div class="form-group col-md-12">
-              <label class="control-label" for="  ">Tipo de Propiedad</label>
+              <label class="control-label" for="tipo_propiedad">Tipo de Propiedad</label>
               <select class="form-control" name="tipo_propiedad" formControlName="tipo_propiedad">
                 <option value="" selected>Seleccione</option>
                 <option value="Departamento">Departamento</option>
+                <option value="Deposito">Deposito</option>
               </select>
             </div>
             <div class="col-md-12 text-center">
@@ -56,12 +61,14 @@
 
     </div>
     <div class="col-md-8 col-sm-12 pr-md-5">
-        <div class="card" *ngIf="show; else elseBlock">
-            <app-propiedades></app-propiedades>
+      <div class="card" *ngIf="show; else elseBlock">
+        <app-propiedades></app-propiedades>
+      </div>
+      <ng-template #elseBlock>
+        <div class="card">
+          <app-detail-propiedad></app-detail-propiedad>
         </div>
-        <ng-template #elseBlock>
-                <app-detail-propiedad></app-detail-propiedad>
-        </ng-template>
+      </ng-template>
     </div>
   </div>
 </div>

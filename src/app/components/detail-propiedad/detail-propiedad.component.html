@@ -1,11 +1,12 @@
 <div class="card-header bg-dark text-light">
   <h5 class="mb-0">
-    <button class="btn btn-dark mr-3 pt-0 pb-0" routerLink="/propiedad"><i class="fas fa-long-arrow-alt-left"></i></button>
+    <button class="btn btn-dark mr-3 pt-0 pb-0" routerLink="/propiedad"><i
+        class="fas fa-long-arrow-alt-left"></i></button>
     <i class="fa fa-building fa-20" aria-hidden="true"></i>
     Propiedad
   </h5>
 </div>
-<div class="card-body">
+<div class="card-body contentProp">
   <div class="row">
     <div class="col-md-6">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -39,25 +40,88 @@
 
     </div>
     <div class="col-md-6">
-      <span class="h5">Operación: </span>{{ (propiedad | async)?.tipo_operacion }}<br>
-      <span class="h5"><i class="fas fa-money-check-alt text-muted"></i>Valor: </span>{{ (propiedad | async)?.precio }} USD<br>
-      <span class="h5"><i class="fas fa-home-lg-alt text-muted"></i>Superficie: </span>100m<sup>2</sup><br>
-      <span class="h5"><i class="fas fa-map-marked-alt text-muted"></i> Ciudad: </span>{{ (propiedad | async)?.cuidad }}<br>
-      <span class="h5"><i class="fas fa-map-marker-alt text-muted"></i>Calle: </span>{{ (propiedad | async)?.calle }}, {{ (propiedad | async)?.barrio }}<br>
-      <span class="h5"><i class="fas fa-bed text-muted"></i> Dormitorio: </span>{{ (propiedad | async)?.dormitorios }}<br>
-      <span class="h5"><i class="fas fa-clock text-muted"></i> Antiguedad: </span>{{ (propiedad | async)?.antiguedad }} Años<br>
-      <span class="h5"><i class="fas fa-clipboard-check text-muted"></i> Estado: </span>{{ (propiedad | async)?.estado }}<br>
+      <span class="h5 font-weight-bolder"><i class="iconW fas fa-exchange-alt text-muted"></i>Operación:
+      </span>{{ (propiedad | async)?.tipo_operacion }}<br>
+      <span class="h5 font-weight-bolder"><i class="iconW fas fa-money-check-alt text-muted"></i>Valor:
+      </span>{{ (propiedad | async)?.precio }} USD<br>
+      <span class="h5 font-weight-bolder"><i class="iconW fas fa-home text-muted"></i>Superficie:
+      </span>100m<sup>2</sup><br>
+      <span class="h5 font-weight-bolder"><i class="iconW fas fa-map-marked-alt text-muted"></i>Ciudad:
+      </span>{{ (propiedad | async)?.cuidad }}<br>
+      <span class="h5 font-weight-bolder"><i class="iconW fas fa-map-marker-alt text-muted"></i>Calle:
+      </span>{{ (propiedad | async)?.calle }}, {{ (propiedad | async)?.barrio }}<br>
+      <span class="h5 font-weight-bolder"><i class="iconW fas fa-bed text-muted"></i>Dormitorio:
+      </span>{{ (propiedad | async)?.dormitorios }}<br>
+      <span class="h5 font-weight-bolder"><i class="iconW fas fa-clock text-muted"></i>Antiguedad:
+      </span>{{ (propiedad | async)?.antiguedad }} Años<br>
+      <span class="h5 font-weight-bolder"><i class="iconW fas fa-clipboard-check text-muted"></i>Estado:
+      </span>{{ (propiedad | async)?.estado }}<br>
     </div>
 
     <div class="col-md-12 mt-3">
-      <span class="h5">Descripción:</span>
+      <span class="h5 font-weight-bolder">Descripción:</span>
       <p class="text-justify mt-3">{{ (propiedad | async)?.descripcion }}</p>
     </div>
     <div class="col-md-12 text-right">
-      <button class="btn btn-danger font-weight-bolder ">
+      <button class="btn btn-danger font-weight-bolder" data-toggle="modal" data-target="#exampleModal">
         <i class="fas fa-id-card"></i>
         Contactar
       </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-light">
+        <h5 class="modal-title " id="exampleModalLabel">Contactanos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="formContacto" (ngSubmit)="onSaveMsj()" novalidate>
+
+        <div class="modal-body">
+          <div class="col-md-12 textFooter">
+            <div class="form-group">
+              <input type="text" class="form-control" [ngClass]="{'is-invalid': !formContacto.get('nombre').valid, 'is-valid': formContacto.get('nombre').valid}"
+                formControlName="nombre" placeholder="Nombre" />
+              <span *ngIf="!formContacto.get('nombre').valid" class="invalid-feedback">
+                Campo Requerido
+              </span>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" [ngClass]="{'is-invalid': !formContacto.get('telefono').valid, 'is-valid': formContacto.get('telefono').valid}"
+                formControlName="telefono" placeholder="Telefono" />
+              <span *ngIf="!formContacto.get('telefono').valid" class="invalid-feedback">
+                Campo Requerido
+              </span>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" [ngClass]="{'is-invalid': !formContacto.get('email').valid, 'is-valid': formContacto.get('email').valid}"
+                formControlName="email" placeholder="Email" />
+              <span *ngIf="!formContacto.get('email').valid" class="invalid-feedback">
+                Campo Requerido
+              </span>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" placeholder="Consulta" rows="3" formControlName="consulta" [ngClass]="{'is-invalid': !formContacto.get('consulta').valid,'is-valid': formContacto.get('consulta').valid }"></textarea>
+              <span *ngIf="!formContacto.get('consulta').valid" class="invalid-feedback">
+                  Campo Requerido
+                </span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">Close</button>
+          <button type="submit" [disabled]="!formContacto.valid" class="btn btn-success">
+            <i class="far fa-envelope"></i>
+            Send message
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

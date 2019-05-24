@@ -21,6 +21,8 @@ export interface Item {
   publicar: number;
   tipo_operacion: string;
   tipo_propiedad: string;
+  lat: number;
+  lng: number;
 }
 
 @Injectable({
@@ -41,11 +43,13 @@ export class PropiedadesService {
     let data = this.itemsCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Item
+        let cordenadas = data.latitud.split(",");
+        data.lat  = parseFloat(cordenadas[0]);
+        data.lng = parseFloat(cordenadas[1]);
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
     );
-    this.propiedades
     return data;
   }
 
@@ -57,8 +61,14 @@ export class PropiedadesService {
 
   }
 
-  onFilterPropiedades(Filter){
-      let data = this.db.collection<Item>('propiedad', ref => ref.where('tipo_operacion', '==', Filter.Tpo_Operacion)).snapshotChanges().pipe(
+  onFilterPropiedades(Filter?){
+      let data = this.db.collection<Item>('propiedad', ref => {
+        let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+        if (Filter.Tpo_Operacion) { query = query.where('tipo_operacion', '==', Filter.Tpo_Operacion) };
+        if (Filter.barrio) { query = query.where('barrio', '==', Filter.barrio) };
+        if (Filter.orderBy) { query = query.orderBy(Filter.orderBy, "asc")}
+        return query;
+      }).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Item
         const id = a.payload.doc.id;

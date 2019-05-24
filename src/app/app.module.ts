@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
 import {AngularFireModule} from '@angular/fire'
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 //import { ScrollingModule} from '@angular/cdk/scrolling'
-import { FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import {NgxPaginationModule} from 'ngx-pagination'; 
 
@@ -21,12 +21,12 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ContenedorComponent } from './components/contenedor/contenedor.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MapComponent } from './components/map/map.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 //Servicios
 import {PropiedadesService} from './providers/propiedades.service';
 import { FaqService } from './providers/faq.service';
 import { from } from 'rxjs';
+import { EmpresaComponent } from './components/empresa/empresa.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import { from } from 'rxjs';
     ContenedorComponent,
     DetailPropiedadComponent,
     PropiedadesComponent,
-    FaqComponent
+    FaqComponent,
+    EmpresaComponent
   ],
   imports: [
     ReactiveFormsModule,

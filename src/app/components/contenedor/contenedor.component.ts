@@ -10,8 +10,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class ContenedorComponent implements OnInit {
   public show: boolean;
-  public propiedades : any[];
+  public propiedades: any[];
   public formSearch = new FormGroup({
+    orderBy: new FormControl(''),
     tipo_operacion: new FormControl(''),
     barrio: new FormControl(''),
     tipo_propiedad: new FormControl(''),
@@ -22,18 +23,25 @@ export class ContenedorComponent implements OnInit {
     this.onShowComponent();
   }
   onShowComponent() {
-    if(this.route.snapshot.paramMap.get("id"))
+    if (this.route.snapshot.paramMap.get("id"))
       this.show = false;
     else
       this.show = true;
   }
-  onSearch(){
-    let Filter = {
-      "Tpo_Operacion" : this.formSearch.get('tipo_operacion').value,
-      "barrio" : this.formSearch.get('barrio').value,
-      "tipo_propiedad" : this.formSearch.get('tipo_propiedad').value
-    };
-    this._PropService.onFilterPropiedades(Filter);
+  onSearch() {
+    let Filter: any = {};
+    let data = this.formSearch.value;
+    if (data.tipo_operacion != "")
+      Filter.Tpo_Operacion = data.tipo_operacion;
+    if (data.barrio != "")
+      Filter.barrio = data.barrio;
+    if (data.tipo_propiedad != "")
+      Filter.tipo_propiedad = data.tipo_propiedad;
+    if (data.orderBy != "")
+      Filter.orderBy = data.orderBy;
+
+    if (Object.keys(Filter).length > 0)
+      this._PropService.onFilterPropiedades(Filter);
   }
 
 }

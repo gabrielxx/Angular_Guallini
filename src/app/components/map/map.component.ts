@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PropiedadesService } from '../../providers/propiedades.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-map',
@@ -11,9 +13,12 @@ export class MapComponent implements OnInit {
   lat = -34.6069604;
   lng = -58.5063516;
 
-  constructor() { }
+  public propiedades: Observable<any[]>;
+
+  constructor(private _PropService: PropiedadesService) { }
 
   ngOnInit() {
+    this.propiedades = this._PropService.onLoadPropiedades();
   }
 
 }
